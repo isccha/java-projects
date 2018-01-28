@@ -28,8 +28,8 @@ public class GUI extends JFrame{
    ImageIcon iconB;
    ImageIcon iconE;
    ImageIcon iconS;
-	
-	
+
+
    public GUI(Controller con) {
       listener = new Listener(con);
       try{ //????????????????????
@@ -65,262 +65,263 @@ public class GUI extends JFrame{
       iconS = new ImageIcon( newimg );		
    }
 	
-	//public void createComp() throws IOException {
-	public void createComp() {
-        //super("Molino"); // this.setTitle("primera ventana")
-        this.setSize(900,300);
-        
-		//BufferedImage img = ImageIO.read(new File("images/vert.png") );				
-		//BufferedImage bi = new BufferedImage(10,10, BufferedImage.TYPE_INT_ARGB);
-		
-		//BufferedImage img = null;
-		//
-		//try {
-		//	img = ImageIO.read(new File("images/vert.png") );
-		//} catch (IOException e) {
-		//}		
-		
-		//BufferedImage img = null;
-		//
-		//try{
-		//	img = ImageIO.read(new File("images/vert.png") );
-		//} catch (IOException e) {
-		//};		
+   //public void createComp() throws IOException {
+   public void createComp() {
+      //super("Molino"); // this.setTitle("primera ventana")
+      this.setSize(900,300);
+      this.setResizable(false);
 
-		
-        //jp_Board = new JPanel();
-		jp_Board = new JPanel() {
+      //BufferedImage img = ImageIO.read(new File("images/vert.png") );				
+      //BufferedImage bi = new BufferedImage(10,10, BufferedImage.TYPE_INT_ARGB);
 
-			protected void paintComponent(Graphics g){
-				super.paintComponent(g);
-				
-				BufferedImage img = null;				
-				File f = new File("images/board.png");
-				//try{
-				//	img = ImageIO.read(new File("images/vert.png") );
-				//} catch (IOException e) {
-				//};	
-				try{
-					img = ImageIO.read(f);
-				}catch(IOException e){					
-				};
-				int iWidth2 	= img.getWidth();
-				int iHeight2 	= img.getHeight();
-				int x = this.getParent().getWidth() - iWidth2;
-				int y = this.getParent().getHeight()- iHeight2;				
-				//https://stackoverflow.com/questions/19125707/simplest-way-to-set-image-as-jpanel-background
-				g.drawImage(img,x,y, null);
-				//g.drawImage(img,0,0, null);
-			}
-			
-			@Override
-			public Dimension getMinimumSize() {
-				return new Dimension(400, 300);
-			}			
-			//@Override
-			//public Dimension getPreferredSize() {
-			//	return new Dimension(400, 300);
-			//}
-	        //
-			//@Override
-			//public Dimension getMaximumSize() {
-			//	return new Dimension(400, 300);
-			//}			
+      //BufferedImage img = null;
+      //
+      //try {
+      //	img = ImageIO.read(new File("images/vert.png") );
+      //} catch (IOException e) {
+      //}		
 
-		};
-		
-		this.setResizable(false);
-        Container c = this.getContentPane();
-		
-		scorePanel = new JPanel();
-		
-		
-        jp_Board.setLayout(new GridLayout(7,7, 5, 5));
-		
-		
-		//jp_Board.setMaximumSize( jp_Board.getPreferredSize() );   ??
-		//jp_Board.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-		
-		//button_l = new JButton[7][7];
-		button_l = new JButton[7][7];
-		
-		for(int i=0; i<7; i++){
-			for(int j=0; j<7; j++){
-				button_l[i][j] = new JButton();
-				button_l[i][j].setName(i+","+j);
-			}
-		}	
-		//ImageIcon icon0 = new ImageIcon("images/vert.png");
-		ImageIcon icon0 = new ImageIcon("images/fui.png");
-		Image img = icon0.getImage() ;  
-		Image newimg = img.getScaledInstance( 20, 20,  java.awt.Image.SCALE_SMOOTH ) ;  
-		icon0 = new ImageIcon( newimg );
-		//ImageIcon icon0 = new ImageIcon(getClass().getResource("images/vert.png"));
-		//JLabel ll = new JLabel("baiba");
-		//ll.setIcon(icon0);	
-		
-		button_l[0][0].addActionListener(listener);
-		button_l[0][3].addActionListener(listener);
-		button_l[0][6].addActionListener(listener);		
-		button_l[6][0].addActionListener(listener);
-		button_l[6][3].addActionListener(listener);
-		button_l[6][6].addActionListener(listener);
-		
-		button_l[1][1].addActionListener(listener);
-		button_l[1][3].addActionListener(listener);
-		button_l[1][5].addActionListener(listener);		
-		button_l[5][1].addActionListener(listener);
-		button_l[5][3].addActionListener(listener);
-		button_l[5][5].addActionListener(listener);		
-		
-		button_l[2][2].addActionListener(listener);
-		button_l[2][3].addActionListener(listener);		
-		button_l[2][4].addActionListener(listener);		
-		button_l[4][2].addActionListener(listener);
-		button_l[4][3].addActionListener(listener);
-		button_l[4][4].addActionListener(listener);
-		
-		button_l[3][0].addActionListener(listener);
-		button_l[3][1].addActionListener(listener);
-		button_l[3][2].addActionListener(listener);
-		button_l[3][4].addActionListener(listener);
-		button_l[3][5].addActionListener(listener);
-		button_l[3][6].addActionListener(listener);				
-		
-		
-		for(int i=0; i<7; i++){
-			for(int j=0; j<7; j++){		
-				if( ( (i == 0 || i == 6) && (j==0 || j==3 || j==6) ) ||
-					( (i==1 || i ==5) && (j==1 || j==3 || j==5)) 	 ||
-					( (i==2 || i==4) && (j==2 || j==3 || j==4))		 ||
-					( i==3 && j!=3) 									){ 	
-					button_l[i][j].setContentAreaFilled(false);
-					//button_l[i][j].setBorder(new RoundedBorder(10));															
-					button_l[i][j].setIcon(icon0);
-				}else{
-					button_l[i][j].setContentAreaFilled(false);
-				}
-				button_l[i][j].setBorder(null);
-			}
-		}					
-		
-		
-		for(int i=0; i<7; i++){
-			for(int j=0; j<7; j++){		
-				jp_Board.add(button_l[i][j]);
-			}
-		}		
-		scoreLabel = new JLabel();
-		scoreLabel.setBorder(BorderFactory.createLineBorder(Color.blue));
-        
-		scoreLabel.setFont(new Font("Calibri", Font.BOLD, 12));
-        ;
-		
-		JMenuBar bar = new JMenuBar();
-		JMenu fileMenu = new JMenu("Game");
-		
-		setJMenuBar(bar);
-		
-		JMenuItem itemRest = new JMenuItem("Restart");	
-		itemRest.setName("restart");
-		itemRest.addActionListener(listener);
-		
-		JMenuItem itemExit = new JMenuItem("Exit");	
-		itemExit.setName("exit");
-		itemExit.addActionListener(listener);		
-		
-		bar.add(fileMenu);
-		fileMenu.add(itemRest);
-		fileMenu.add(itemExit);
-		
-		scorePanel.add(scoreLabel);			
-		
-        c.add(scorePanel,BorderLayout.NORTH);
-		
-        c.add(jp_Board,BorderLayout.SOUTH);        
-        
-        this.setVisible(true);		
-	}
-	
-	public void updateStatus(String m){
-		scoreLabel.setText(m);
-	}	
-	
-    private class InsertAction implements ActionListener {
+      //BufferedImage img = null;
+      //
+      //try{
+      //	img = ImageIO.read(new File("images/vert.png") );
+      //} catch (IOException e) {
+      //};		
 
-        public void actionPerformed(ActionEvent event) {
-           // String input = event.getActionCommand();
-           // if (start) {
-           //     text.setText("");
-           //     start = false;
-           // }
-           // text.setText(text.getText() + input);
-			//boton[Integer.parseInt(input)].setBackground(Color.BLUE);
-			//boton[Integer.parseInt(input)].setText("8");
-           // text.revalidate();
-        }
-    }
-	
-    public void changeValues(int[][] v){ //lo llama el controler en updateData()
-		if(v[0][0] == 7){
-			button_l[0][0].setBackground(Color.RED);
-			button_l[0][0].setText("X");
-		}else if(v[0][0] == 11){
-			button_l[0][0].setBackground(Color.BLUE);
-			button_l[0][0].setText("O");
-		}else{
-			System.out.println("something wrong ...");
-		}
-    }	
-	public void updateBoard(char[][] b){
-		String x;
-		for(int i=0; i < 7; i++){			
-			for(int j=0; j < 7; j++){
-				x = String.valueOf(b[i][j]);
-				if(x.equals("A")){
-					button_l[i][j].setIcon(iconA);
-				}else if(x.equals("B")){
-					button_l[i][j].setIcon(iconB);					
-				}else if(x.equals(".")){
-					button_l[i][j].setIcon(iconE);
-				}
-				//button_l[i][j].setText(x);
-			}
-		}
-	}
-	public void updateColor(int[] coord, int mode){
-		
-		if(mode==1){
-			//button_l[coord[0]][coord[1]].setBackground(Color.BLUE);
-			button_l[coord[0]][coord[1]].setIcon(iconS);
-		}else{
-			//button_l[coord[0]][coord[1]].setBackground(null);
-			//button_l[coord[0]][coord[1]].setIcon(iconTmp);
-		}
-	}
-	
-    public void end(String m){
-        Object[] options = {"Play again", "Close"};
-        try {
-            //int n = JOptionPane.showOptionDialog(mainFrame,"No moves available","GAME OVER", JOptionPane.YES_NO_OPTION,
-			int n = JOptionPane.showOptionDialog(mainFrame,"No moves available. "+m,"GAME OVER", JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE,
-                    null,
-                    options,
-                    options[0]);
-            if(n == 0){
-                listener.endAction();
+
+      //jp_Board = new JPanel();
+      jp_Board = new JPanel() {
+
+         protected void paintComponent(Graphics g){
+            super.paintComponent(g);
+
+            BufferedImage img = null;				
+            File f = new File("images/board.png");
+            //try{
+            //	img = ImageIO.read(new File("images/vert.png") );
+            //} catch (IOException e) {
+            //};	
+            try{
+               img = ImageIO.read(f);
+            }catch(IOException e){					
+            };
+            int iWidth2 	= img.getWidth();
+            int iHeight2 	= img.getHeight();
+            int x = this.getParent().getWidth() - iWidth2;
+            int y = this.getParent().getHeight()- iHeight2;				
+            //System.out.println("iw "+iWidth2+" iHeight2 "+iHeight2+" x "+this.getParent().getWidth()+" y "+this.getParent().getHeight());
+            //https://stackoverflow.com/questions/19125707/simplest-way-to-set-image-as-jpanel-background
+            g.drawImage(img,x,y, null);
+            //g.drawImage(img,0,0, null);
+         }
+
+         @Override
+         public Dimension getMinimumSize() {
+            return new Dimension(400, 300);
+         }			
+         //@Override
+         //public Dimension getPreferredSize() {
+         //	return new Dimension(400, 300);
+         //}
+         //
+         //@Override
+         //public Dimension getMaximumSize() {
+         //	return new Dimension(400, 300);
+         //}			
+
+      };
+
+      Container c = this.getContentPane();
+
+      scorePanel = new JPanel();
+
+
+      jp_Board.setLayout(new GridLayout(7,7, 5, 5));
+
+
+      //jp_Board.setMaximumSize( jp_Board.getPreferredSize() );   ??
+      //jp_Board.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+
+      //button_l = new JButton[7][7];
+      button_l = new JButton[7][7];
+
+      for(int i=0; i<7; i++){
+         for(int j=0; j<7; j++){
+            button_l[i][j] = new JButton();
+            button_l[i][j].setName(i+","+j);
+         }
+      }	
+      //ImageIcon icon0 = new ImageIcon("images/vert.png");
+      ImageIcon icon0 = new ImageIcon("images/fui.png");
+      Image img = icon0.getImage() ;  
+      Image newimg = img.getScaledInstance( 20, 20,  java.awt.Image.SCALE_SMOOTH ) ;  
+      icon0 = new ImageIcon( newimg );
+      //ImageIcon icon0 = new ImageIcon(getClass().getResource("images/vert.png"));
+      //JLabel ll = new JLabel("baiba");
+      //ll.setIcon(icon0);	
+
+      button_l[0][0].addActionListener(listener);
+      button_l[0][3].addActionListener(listener);
+      button_l[0][6].addActionListener(listener);		
+      button_l[6][0].addActionListener(listener);
+      button_l[6][3].addActionListener(listener);
+      button_l[6][6].addActionListener(listener);
+
+      button_l[1][1].addActionListener(listener);
+      button_l[1][3].addActionListener(listener);
+      button_l[1][5].addActionListener(listener);		
+      button_l[5][1].addActionListener(listener);
+      button_l[5][3].addActionListener(listener);
+      button_l[5][5].addActionListener(listener);		
+
+      button_l[2][2].addActionListener(listener);
+      button_l[2][3].addActionListener(listener);		
+      button_l[2][4].addActionListener(listener);		
+      button_l[4][2].addActionListener(listener);
+      button_l[4][3].addActionListener(listener);
+      button_l[4][4].addActionListener(listener);
+
+      button_l[3][0].addActionListener(listener);
+      button_l[3][1].addActionListener(listener);
+      button_l[3][2].addActionListener(listener);
+      button_l[3][4].addActionListener(listener);
+      button_l[3][5].addActionListener(listener);
+      button_l[3][6].addActionListener(listener);				
+
+
+      for(int i=0; i<7; i++){
+         for(int j=0; j<7; j++){		
+            if( ( (i == 0 || i == 6) && (j==0 || j==3 || j==6) ) ||
+               ( (i==1 || i ==5) && (j==1 || j==3 || j==5)) 	 ||
+               ( (i==2 || i==4) && (j==2 || j==3 || j==4))		 ||
+               ( i==3 && j!=3) 									){ 	
+               button_l[i][j].setContentAreaFilled(false);
+               //button_l[i][j].setBorder(new RoundedBorder(10));															
+               button_l[i][j].setIcon(icon0);
+            }else{
+               button_l[i][j].setContentAreaFilled(false);
             }
-            else
-                System.exit(0);
+               button_l[i][j].setBorder(null);
+         }
+      }					
 
-        } catch (NumberFormatException e) {
+
+      for(int i=0; i<7; i++){
+         for(int j=0; j<7; j++){		
+            jp_Board.add(button_l[i][j]);
+         }
+      }		
+      scoreLabel = new JLabel();
+      scoreLabel.setBorder(BorderFactory.createLineBorder(Color.blue));
+
+      scoreLabel.setFont(new Font("Calibri", Font.BOLD, 12));
+      
+
+      JMenuBar bar = new JMenuBar();
+      JMenu fileMenu = new JMenu("Game");
+
+      setJMenuBar(bar);
+
+      JMenuItem itemRest = new JMenuItem("Restart");	
+      itemRest.setName("restart");
+      itemRest.addActionListener(listener);
+
+      JMenuItem itemExit = new JMenuItem("Exit");	
+      itemExit.setName("exit");
+      itemExit.addActionListener(listener);		
+
+      bar.add(fileMenu);
+      fileMenu.add(itemRest);
+      fileMenu.add(itemExit);
+
+      scorePanel.add(scoreLabel);			
+
+      c.add(scorePanel,BorderLayout.NORTH);
+
+      c.add(jp_Board,BorderLayout.SOUTH);        
+
+      this.setVisible(true);		
+   }
+
+   public void updateStatus(String m){
+      scoreLabel.setText(m);
+   }	
+
+   private class InsertAction implements ActionListener {
+
+      public void actionPerformed(ActionEvent event) {
+         // String input = event.getActionCommand();
+         // if (start) {
+         //     text.setText("");
+         //     start = false;
+         // }
+         // text.setText(text.getText() + input);
+         //boton[Integer.parseInt(input)].setBackground(Color.BLUE);
+         //boton[Integer.parseInt(input)].setText("8");
+         // text.revalidate();
+      }
+   }
+
+   public void changeValues(int[][] v){ //lo llama el controler en updateData()
+      if(v[0][0] == 7){
+         button_l[0][0].setBackground(Color.RED);
+         button_l[0][0].setText("X");
+      }else if(v[0][0] == 11){
+         button_l[0][0].setBackground(Color.BLUE);
+         button_l[0][0].setText("O");
+      }else{
+         System.out.println("something wrong ...");
+      }
+   }	
+   public void updateBoard(char[][] b){
+      String x;
+      for(int i=0; i < 7; i++){			
+         for(int j=0; j < 7; j++){
+            x = String.valueOf(b[i][j]);
+            if(x.equals("A")){
+               button_l[i][j].setIcon(iconA);
+            }else if(x.equals("B")){
+               button_l[i][j].setIcon(iconB);					
+            }else if(x.equals(".")){
+               button_l[i][j].setIcon(iconE);
+            }
+            //button_l[i][j].setText(x);
+         }
+      }
+   }
+   public void updateColor(int[] coord, int mode){
+
+      if(mode==1){
+            //button_l[coord[0]][coord[1]].setBackground(Color.BLUE);
+            button_l[coord[0]][coord[1]].setIcon(iconS);
+      }else{
+            //button_l[coord[0]][coord[1]].setBackground(null);
+            //button_l[coord[0]][coord[1]].setIcon(iconTmp);
+      }
+   }
+
+   public void end(String m){
+      Object[] options = {"Play again", "Close"};
+      try {
+         //int n = JOptionPane.showOptionDialog(mainFrame,"No moves available","GAME OVER", JOptionPane.YES_NO_OPTION,
+         int n = JOptionPane.showOptionDialog(mainFrame,"No moves available. "+m,"GAME OVER", JOptionPane.YES_NO_OPTION,
+         JOptionPane.WARNING_MESSAGE,
+         null,
+         options,
+         options[0]);
+         if(n == 0){
+            listener.endAction();
+         }else{
             System.exit(0);
-        }
+         }
 
-    }	
-    //public static void main(String[] args) {
-    //    GuiPaver gui1 = new GuiPaver();
-    //    gui1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    //}    
+      } catch (NumberFormatException e) {
+         System.exit(0);
+      }
+
+   }	
+   //public static void main(String[] args) {
+   //    GuiPaver gui1 = new GuiPaver();
+   //    gui1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   //}    
 }
