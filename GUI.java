@@ -90,6 +90,8 @@ public class GUI extends JFrame{
 
 
       //jp_Board = new JPanel();
+      final int xWi = 900;
+      final int yHe = 162;
       jp_Board = new JPanel() {
 
          protected void paintComponent(Graphics g){
@@ -107,8 +109,10 @@ public class GUI extends JFrame{
             };
             int iWidth2 	= img.getWidth();
             int iHeight2 	= img.getHeight();
-            int x = this.getParent().getWidth() - iWidth2;
-            int y = this.getParent().getHeight()- iHeight2;				
+            //int x = this.getParent().getWidth() - iWidth2;
+            //int y = this.getParent().getHeight()- iHeight2;				
+            int x = xWi- iWidth2;
+            int y = yHe- iHeight2;			
             //System.out.println("iw "+iWidth2+" iHeight2 "+iHeight2+" x "+this.getParent().getWidth()+" y "+this.getParent().getHeight());
             //https://stackoverflow.com/questions/19125707/simplest-way-to-set-image-as-jpanel-background
             g.drawImage(img,x,y, null);
@@ -117,17 +121,17 @@ public class GUI extends JFrame{
 
          @Override
          public Dimension getMinimumSize() {
-            return new Dimension(400, 300);
+            return new Dimension(xWi, yHe);
          }			
-         //@Override
-         //public Dimension getPreferredSize() {
-         //	return new Dimension(400, 300);
-         //}
-         //
-         //@Override
-         //public Dimension getMaximumSize() {
-         //	return new Dimension(400, 300);
-         //}			
+         @Override
+         public Dimension getPreferredSize() {
+         	return new Dimension(xWi, yHe);
+         }
+         
+         @Override
+         public Dimension getMaximumSize() {
+         	return new Dimension(894, yHe);
+         }			
 
       };
 
