@@ -6,4 +6,4 @@ Instructions:
    - Execute "Controller" file:
       > java Controller
 Pictures:
-![Molino game](isccha.github.com/java-projects/MolinoGame/images/molinoGame.png)
+![Molino game](MolinoGame/images/molinoGame.png)
